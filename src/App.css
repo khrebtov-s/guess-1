@@ -1,0 +1,104 @@
+.App {
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,116,1) 35%, rgba(0,212,255,1) 100%);
+}
+
+.logo_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board_wrapper {
+  margin-top: 30px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.board {
+  display: block;
+  background: #400D1E;
+  border-radius: 20px;
+  border: 20px solid #A45A1C;
+  margin: 50px;
+  width: 100%;
+}
+
+.list {
+  list-style: none;
+  padding: 10px;
+}
+
+.category_wrapper {
+  height: max-content;
+  padding: 20px;
+  display: flex;
+  gap: 70px;
+}
+
+.category_name {
+  background: #FED50A;
+  padding: 20px;
+  width: 200px;
+  font-weight: 600;
+  color: white;
+  font-size: 28px;
+  border-radius: 20px;
+}
+
+.note_wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.note {
+  padding: 20px;
+  border-radius: 50px;
+  text-align: center;
+  width: 50px;
+  height: 20px;
+  background: #760E17;
+  border: 5px solid #FFD411;
+  color: white;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 20px;
+}
+
+.note_active {
+  background: red;
+  border: 5px solid yellow;
+}
+
+.users {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 100px;
+  padding-right: 150px;
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  height: 40px;
+  border-radius: 20px;
+  border: 2px solid red;
+  width: 100%;
+  font-size: 25px;
+  padding: 10px;
+  text-align: center;
+}
+
+.footer {
+  height: 200px;
+}
