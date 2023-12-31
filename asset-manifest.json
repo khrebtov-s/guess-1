@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/guess-1/static/css/main.35623cfd.css",
+    "main.js": "/guess-1/static/js/main.ddc42609.js",
+    "static/media/logo.png": "/guess-1/static/media/logo.6ddae06db0499893e161.png",
+    "index.html": "/guess-1/index.html",
+    "main.35623cfd.css.map": "/guess-1/static/css/main.35623cfd.css.map",
+    "main.ddc42609.js.map": "/guess-1/static/js/main.ddc42609.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35623cfd.css",
+    "static/js/main.ddc42609.js"
+  ]
+}
