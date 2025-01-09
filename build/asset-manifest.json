@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/guess-1/static/css/main.8fadc2d0.css",
+    "main.js": "/guess-1/static/js/main.90310168.js",
+    "static/media/30.mp3": "/guess-1/static/media/30.98669f6b99ce057ddca6.mp3",
+    "static/media/40.mp3": "/guess-1/static/media/40.1d8dca963a870d525fe8.mp3",
+    "static/media/20.mp3": "/guess-1/static/media/20.756987360f210e466ebd.mp3",
+    "static/media/10.mp3": "/guess-1/static/media/10.18ed9278ba386c51ab0d.mp3",
+    "static/media/background.jpg": "/guess-1/static/media/background.e81a6fe02d267e2cdab7.jpg",
+    "static/media/Главная.mp3": "/guess-1/static/media/Главная.dcf3bb98ea09cca3c751.mp3",
+    "static/media/Заставка.mp3": "/guess-1/static/media/Заставка.ed5ad52728addcc1473f.mp3",
+    "static/media/Конец раунда.mp3": "/guess-1/static/media/Конец раунда.b45eb691d0c7f89f9a46.mp3",
+    "static/media/logo.png": "/guess-1/static/media/logo.6ddae06db0499893e161.png",
+    "static/media/Реклама.mp3": "/guess-1/static/media/Реклама.d10727b3a2d748c68fd2.mp3",
+    "static/media/Выбор рубрики.mp3": "/guess-1/static/media/Выбор рубрики.c7ddd8e3dc12c8878d80.mp3",
+    "static/media/Победитель.mp3": "/guess-1/static/media/Победитель.a2eb9dafba26933b0b89.mp3",
+    "static/media/Правильно.mp3": "/guess-1/static/media/Правильно.14ebe61d049fbb49eef3.mp3",
+    "static/media/Не угадал.mp3": "/guess-1/static/media/Не угадал.19a19002d8db38c009c0.mp3",
+    "static/media/Не правильно.mp3": "/guess-1/static/media/Не правильно.4da83c6a03d7c0e4a40c.mp3",
+    "index.html": "/guess-1/index.html",
+    "main.8fadc2d0.css.map": "/guess-1/static/css/main.8fadc2d0.css.map",
+    "main.90310168.js.map": "/guess-1/static/js/main.90310168.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8fadc2d0.css",
+    "static/js/main.90310168.js"
+  ]
+}
