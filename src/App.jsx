@@ -1,33 +1,22 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import './App.css';
 import Logo from './assets/logo.png';
 
-const Note = ({ value, category, round }) => {
+const Note = ({ value, category, onPlay }) => {
   const [isActive, setIsActive] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
-  const audioRef = useRef(null);
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isActive) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      } else {
-        audioRef.current.play();
-      }
-      setIsActive((prev) => !prev);
+    const audioSrc = require(`./assets/audio/1 round/${category}/${value}.mp3`);
+    if (isActive) {
+      onPlay(null); // Остановить текущий звук
+      setIsActive(false);
+    } else {
+      onPlay(audioSrc, () => setIsActive(false)); // Запустить новый звук
+      setIsActive(true);
     }
-  };
-
-  const handleEnded = () => {
-    setIsActive(false);
     setIsSelected(true);
-  };
-
-  const getAudioSrc = () => {
-    const roundPath = round === 1 ? '1 раунд' : '2 раунд';
-    return require(`./assets/audio/${roundPath}/${category}/${value}.mp3`);
   };
 
   return (
@@ -37,41 +26,32 @@ const Note = ({ value, category, round }) => {
       aria-label={isSelected ? 'Used' : isActive ? 'Playing' : 'Stopped'}
     >
       {value}
-      <audio
-        ref={audioRef}
-        src={getAudioSrc()}
-        preload="auto"
-        onEnded={handleEnded}
-      />
     </div>
   );
 };
 
-const SoundButton = ({ soundName }) => {
+const SoundButton = ({ soundName, onPlay }) => {
   const [isActive, setIsActive] = useState(false);
-  const audioRef = useRef(null);
 
   const playSound = () => {
-    if (audioRef.current) {
-      if (isActive) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      } else {
-        audioRef.current.play();
-      }
-      setIsActive((prev) => !prev);
+    const audioSrc = require(`./assets/audio/${soundName}.mp3`);
+    if (isActive) {
+      onPlay(null); // Остановить текущий звук
+      setIsActive(false);
+    } else {
+      onPlay(audioSrc, () => setIsActive(false)); // Запустить новый звук
+      setIsActive(true);
     }
   };
 
   return (
     <div className="sound_button" onClick={playSound}>
-      <audio ref={audioRef} src={require(`./assets/audio/${soundName}.mp3`)} preload="auto" />
       {soundName}
     </div>
   );
 };
 
-const SoundPanel = () => {
+const SoundPanel = ({ onPlay }) => {
   const sounds = [
     'Выбор рубрики',
     'Главная',
@@ -87,31 +67,51 @@ const SoundPanel = () => {
   return (
     <div className="sound_panel">
       {sounds.map((soundName) => (
-        <SoundButton key={soundName} soundName={soundName} />
+        <SoundButton key={soundName} soundName={soundName} onPlay={onPlay} />
       ))}
     </div>
   );
 };
 
-const NoteBlock = ({ notes = [10, 20, 30, 40], category, round }) => (
+const NoteBlock = ({ notes = [10, 20, 30, 40], category, onPlay }) => (
   <div className="note_wrapper">
     {notes.map((value) => (
-      <Note key={value} value={value} category={category} round={round} />
+      <Note key={value} value={value} category={category} onPlay={onPlay} />
     ))}
   </div>
 );
 
-const Category = ({ title, round }) => (
+const Category = ({ title, onPlay }) => (
   <li className="item">
     <div className="category_wrapper">
       <div className="category_name">{title}</div>
-      <NoteBlock category={title} round={round} />
+      <NoteBlock category={title} onPlay={onPlay} />
     </div>
   </li>
 );
 
 function App() {
-  const [round, setRound] = useState(1);
+  const [currentAudio, setCurrentAudio] = useState(null);
+
+  const handlePlayAudio = (src, onEnd) => {
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+
+    if (!src) {
+      setCurrentAudio(null);
+      return;
+    }
+
+    const newAudio = new Audio(src);
+    setCurrentAudio(newAudio);
+    newAudio.play();
+    newAudio.onended = () => {
+      onEnd?.();
+      setCurrentAudio(null);
+    };
+  };
 
   const categoriesRound1 = [
     'Русские хиты',
@@ -119,14 +119,6 @@ function App() {
     'Сериалы',
     'Ностальгия',
   ];
-
-  const categoriesRound2 = ['Игры', 'Новогодние хиты', 'Хиты 2024'];
-
-  const categories = round === 1 ? categoriesRound1 : categoriesRound2;
-
-  const handleNextRound = () => {
-    setRound(2);
-  };
 
   return (
     <div className="App">
@@ -137,21 +129,15 @@ function App() {
       <main className="board_wrapper">
         <div className="board">
           <ul className="list">
-            {categories.map((category) => (
-              <Category key={category} title={category} round={round} />
+            {categoriesRound1.map((category) => (
+              <Category key={category} title={category} onPlay={handlePlayAudio} />
             ))}
           </ul>
-          {round === 1 && (
-            <button className="next_round_button" onClick={handleNextRound}>
-              Перейти ко второму раунду
-            </button>
-          )}
         </div>
       </main>
 
       <footer className="footer">
-        {/* Панель звуков внизу */}
-        <SoundPanel />
+        <SoundPanel onPlay={handlePlayAudio} />
       </footer>
     </div>
   );
